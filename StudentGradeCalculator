@@ -1,0 +1,36 @@
+import java.util.Scanner;
+
+public class StudentGradeCalculator {
+    public static void main(String []args){
+        Scanner sc= new Scanner(System.in);
+        System.out.print("Enter number of subjects: ");
+        int noOfSubjects= sc.nextInt();
+        int[] subject= new int[noOfSubjects];
+        float maxMarks= noOfSubjects*100;
+        float totalMarks=0;
+        for(int i=0; i<noOfSubjects; i++){
+            System.out.print("Enter marks of Subject "+(i+1)+" (out of 100): ");
+            subject[i]= sc.nextInt();
+            totalMarks+=subject[i];
+        }
+        float averagePercentage= ((totalMarks/(float)maxMarks)*100);
+        System.out.println("The total marks you got out of "+(int)(maxMarks)+" are: "+(int)(totalMarks));
+        System.out.println("The average percentage you got are: "+averagePercentage);
+        if(averagePercentage>90.0){
+            System.out.println("You got an A+ grade!");
+        } else if(averagePercentage>80.0) {
+            System.out.println("You got an A grade!");
+        } else if(averagePercentage>70.0){
+            System.out.println("You got a B grade!");
+        } else if(averagePercentage>60.0){
+            System.out.println("You got a C grade!");
+        } else if(averagePercentage>50.0){
+            System.out.println("You got a D grade!");
+        } else if(averagePercentage>40.0){
+            System.out.println("You got an E grade!");
+        } else{
+            System.out.println("You got an F grade!");
+        }
+        sc.close();
+    }
+}
