@@ -1,0 +1,82 @@
+package CodsoftTasks;
+
+import java.util.Scanner;
+
+class UserBankAccount{
+    private double accountBalance;
+
+    public double bankbalance(){
+        return this.accountBalance;
+    }
+    public double withdraw(double amount){
+        if(amount > accountBalance) {
+            System.out.println("Not enough money in the bank.");
+            return accountBalance;
+        }
+        accountBalance -= amount;
+        return accountBalance;
+    }
+    public double deposit(double amount){
+        accountBalance+=amount;
+        return accountBalance;
+    }
+    public double checkBalance(){
+        return accountBalance;
+    }
+
+    UserBankAccount(double num){
+        accountBalance= num;
+    }
+}
+
+class Atm{
+    UserBankAccount bankAccount= new UserBankAccount(1000);
+    boolean end;
+    public void displayOnScreen(){
+        int num;
+        double depositAmount, withdrawAmount;
+        Scanner sc= new Scanner(System.in);
+        System.out.println("Select any of the numbers below for their corresponding options: ");
+        System.out.println("1. Check the balance\n2. Deposit money\n3. Withdraw money\n4. Exit");
+        num= sc.nextInt();
+        switch(num){
+            case 1:
+                System.out.println("You have Rs."+bankAccount.checkBalance()+" as bank balance."+"\n");
+                break;
+            case 2:
+                System.out.println("Enter the amount you want to deposit:");
+                depositAmount= sc.nextDouble();
+                System.out.println("Transaction successful! Rs."+bankAccount.deposit(depositAmount)+" is your total balance after depositing Rs."+depositAmount+"\n");
+                break;
+            case 3:
+                System.out.println("Enter the amount you want to withdraw:");
+                withdrawAmount= sc.nextDouble();
+                if(withdrawAmount>bankAccount.bankbalance()){
+                    System.out.println("Transaction failed! You do not have enough balance in your account to withdraw money.\n");
+                }else{
+                    System.out.println("Transaction successful! Rs."+bankAccount.withdraw(withdrawAmount)+" is your total balance after withdrawing Rs."+withdrawAmount+"\n");
+                }
+                break;
+            case 4:
+                System.out.println("Transaction terminated.");
+                end= true;
+                break;
+            default:
+                System.out.println("Enter a valid number from 1 to 4 only!\n");
+                break;
+        }
+    }
+}
+
+public class AtmInterface {
+    public static void main(String[] args) {
+        Atm atm= new Atm();
+        System.out.println("Welcome to the ATM!");
+        for(;;){
+            atm.displayOnScreen();
+            if(atm.end==true){
+                break;
+            }
+        }
+    }
+}
